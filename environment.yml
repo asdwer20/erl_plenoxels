@@ -13,7 +13,7 @@ dependencies:
       - ipdb
       - lpips
       - opencv-python>=4.4.0
-      - Pillow>=7.2.0
+      - Pillow==7.2.0
       - pyyaml>=5.3.1
       - tensorboard>=2.4.0
       - imageio
@@ -24,6 +24,6 @@ dependencies:
       - scipy>=1.6.0
   - pytorch=1.11.0
   - torchvision
-  - cudatoolkit
+  - cudatoolkit=11.3
   - tqdm
 
