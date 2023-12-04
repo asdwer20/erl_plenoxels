@@ -2,5 +2,5 @@
 *
 # Except
 !.gitignore
-!.create_metadata_from_replica.py
+!create_metadata_from_replica.py
 

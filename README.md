@@ -62,29 +62,42 @@ pip install -e . --verbose
 In the repo root directory.
 
 ## Getting datasets
-
-We have backends for NeRF-Blender, LLFF, NSVF, and CO3D dataset formats, and the dataset will be auto-detected.
-
-Please get the NeRF-synthetic and LLFF datasets from:
-<https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1>
-(`nerf_synthetic.zip` and `nerf_llff_data.zip`). 
-
-We provide a processed Tanks and temples dataset (with background) in NSVF format at:
-<https://drive.google.com/file/d/1PD4oTP4F8jTtpjd_AQjCsL4h8iYFCyvO/view?usp=sharing>
-
-Note this data should be identical to that in NeRF++
-
-Finally, the real Lego capture can be downloaded from:
-https://drive.google.com/file/d/1PG-KllCv4vSRPO7n5lpBjyTjlUyT8Nag/view?usp=sharing
-
-**Note: we currently do not support the instant-ngp format data (since the project was released before NGP). Using it will trigger the nerf-synthetic (Blender) data loader
-due to similarity, but will not train properly. For real data we use the NSVF format.**
-
-To convert instant-ngp data, please try our script
+All data will be placed in `opt/` in its own folder, using the directory format as follows:
 ```
-cd opt/scripts
-python ingp2nsvf.py <ingp_data_dir> <output_data_dir>
+opt/
+├── <dataset name>
+|   ├── <scene label>
+|       ├── test
+|       ├── train
+|       ├── val
+|       ├── transforms_test.json
+|       ├── transforms_train.json
+|       ├── transforms_val.json
 ```
+
+For example, the existing NeRF dataset should be structured as follows:
+```
+opt/
+├── nerf_synthetic
+|   ├── lego
+|       ├── test
+|       ├── train
+|       ├── val
+|       ├── transforms_test.json
+|       ├── transforms_train.json
+|       ├── transforms_val.json
+|   ├── chair
+|       ├── test
+|       ├── train
+|       ├── val
+|       ├── transforms_test.json
+|       ├── transforms_train.json
+|       ├── transforms_val.json
+|   ├── ...
+```
+
+Any custom dataset (i.e. Replica) will require a similar directory structure and data. The file `opt/replica/apt_2_nav/create_metadata_from_replica.py`
+will generate the transforms `.json` files for the Replica dataset. Be sure to run that to generate the proper `.json` files.
 
 ## Optimization
 
@@ -101,7 +114,9 @@ for forward-facing scenes, and
 The dataset format will be auto-detected from `data_dir`.
 Checkpoints will be in `ckpt/exp_name`.
 
-**For pretrained checkpoints please see:** https://drive.google.com/drive/folders/1SOEJDw8mot7kf5viUK9XryOAmZGe_vvE?usp=sharing
+**Please note that the training will be detached, meaning that the progres will NOT be displayed on the console.**
+
+For pretrained checkpoints please see: https://drive.google.com/drive/folders/1SOEJDw8mot7kf5viUK9XryOAmZGe_vvE?usp=sharing
 
 ## Evaluation
 
